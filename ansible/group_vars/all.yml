@@ -1,0 +1,5 @@
+---
+honeypot_port: 2222
+log_dir: "/opt/honeypot/logs"
+container_name: "cowrie-honeypot"
+docker_image: "ghcr.io/felixotieno1011-art/honeypot-factory:latest"

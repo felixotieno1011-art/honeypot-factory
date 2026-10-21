@@ -1,0 +1,26 @@
+---
+- name: Deploy Cowrie Honeypot
+  hosts: honeypots
+  gather_facts: false
+  tasks:
+    - name: Ensure log directory exists
+      ansible.builtin.file:
+        path: "{{ log_dir }}"
+        state: directory
+        mode: '0755'
+
+    - name: Pull Cowrie Docker image
+      community.docker.docker_image:
+        name: "{{ docker_image }}"
+        source: pull
+
+    - name: Run Cowrie container
+      community.docker.docker_container:
+        name: "{{ container_name }}"
+        image: "{{ docker_image }}"
+        state: started
+        restart_policy: always
+        ports:
+          - "{{ honeypot_port }}:2222"
+        volumes:
+          - "{{ log_dir }}:/cowrie/cowrie-git/var/log/cowrie"
