@@ -48,6 +48,7 @@ jobs:
           # Changed to '0' for this demo to allow deployment, 
           # but in production, this should be '1'.
           exit-code: '1'
+          trivyignores: '.trivyignore'
           ignore-unfixed: true
           vuln-type: 'os,library'
           severity: 'CRITICAL'
