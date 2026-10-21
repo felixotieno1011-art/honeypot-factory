@@ -3,7 +3,7 @@ name: Analyze Honeypot Logs
 
 on:
   schedule:
-    - cron: '0 */6 * * *' # Every 6 hours
+    - cron: '0 */6 * * *'
   workflow_dispatch:
 
 jobs:
@@ -20,15 +20,13 @@ jobs:
 
       - name: Run Analysis Scripts
         run: |
-          echo "Generating report from mock logs..."
-          echo "--- PASSWORD REPORT ---" > report.txt
-          python analysis/top_passwords.py data/mock_cowrie.json >> report.txt
-          echo -e "\n--- GEO REPORT ---" >> report.txt
-          python analysis/geo_map.py data/mock_cowrie.json >> report.txt
-          cat report.txt
+          echo "Generating report..."
+          python analysis/top_passwords.py data/mock_cowrie.json > report.md
+          python analysis/geo_map.py data/mock_cowrie.json >> report.md
+          cat report.md
 
       - name: Upload Report Artifact
         uses: actions/upload-artifact@v4
         with:
           name: honeypot-analysis-report
-          path: report.txt
+          path: report.md
