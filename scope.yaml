@@ -1,0 +1,18 @@
+---
+project: honeypot-factory
+authorized_by: felixotieno1011-art
+description: >
+  Defensive SSH honeypot deployed via GitHub Actions.
+  This system only listens for inbound connections on port 2222.
+  It does not perform outbound scanning or exploitation.
+
+network_policy:
+  mode: passive_listener
+  inbound_ports:
+    - 2222/tcp
+  outbound_targets:
+    - ip-api.com  # For geolocation only
+
+legal_notice: >
+  Unauthorized access to this honeypot is logged and may be reported
+  to relevant authorities. This system is for research and educational purposes.
