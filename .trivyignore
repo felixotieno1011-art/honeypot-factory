@@ -1,0 +1,4 @@
+# Accepted Risks - reviewed 2026-10-21
+# certifi bundles compromised emSign root CAs (fixed in 2026.10.19)
+# Risk: SSL trust chain issues. Accepting temporarily until base image updates.
+GHSA-6q48-6c7w-9gw2
