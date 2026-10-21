@@ -6,10 +6,8 @@ import time
 from collections import Counter
 
 def get_country(ip):
-    # Skip local/private IPs to save API limits
     if ip.startswith(("127.", "10.", "192.168.", "172.")) or ip == "::1":
         return "Local/Private"
-    
     try:
         url = f"http://ip-api.com/json/{ip}?fields=country"
         req = urllib.request.Request(url, headers={'User-Agent': 'HoneypotFactory/1.0'})
@@ -34,19 +32,17 @@ def analyze_geo(filepath):
         print(f"File not found: {filepath}")
         return
 
-    print(f"Found {len(ips)} unique attacker IPs. Mapping countries...")
+    print(f"\n## Top Attacker Countries")
     countries = Counter()
 
-    for i, ip in enumerate(ips):
+    for ip in ips:
         country = get_country(ip)
         countries[country] += 1
-        # Sleep to respect ip-api.com free tier (45 req/min)
         if not ip.startswith(("127.", "10.", "192.168.", "172.")):
             time.sleep(1.5)
 
-    print("\n=== Top Attacker Countries ===")
     for country, count in countries.most_common(10):
-        print(f"{count:4d} | {country}")
+        print(f"- {country} ({count} attempts)")
 
 if __name__ == "__main__":
     if len(sys.argv) != 2:
