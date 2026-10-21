@@ -1,0 +1,7 @@
+{"eventid": "cowrie.login.failed", "src_ip": "192.168.1.100", "password": "123456"}
+{"eventid": "cowrie.login.failed", "src_ip": "192.168.1.100", "password": "password"}
+{"eventid": "cowrie.login.failed", "src_ip": "10.0.0.5", "password": "123456"}
+{"eventid": "cowrie.login.failed", "src_ip": "10.0.0.5", "password": "admin"}
+{"eventid": "cowrie.login.failed", "src_ip": "172.16.0.2", "password": "root"}
+{"eventid": "cowrie.login.failed", "src_ip": "10.0.0.5", "password": "123456"}
+{"eventid": "cowrie.command.input", "src_ip": "10.0.0.5", "input": "uname -a"}
