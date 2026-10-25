@@ -1,3 +1,9 @@
+[![DevSecOps Deploy](https://github.com/felixotieno1011-art/honeypot-factory/actions/workflows/deploy-honeypot.yml/badge.svg)](https://github.com/felixotieno1011-art/honeypot-factory/actions/workflows/deploy-honeypot.yml)
+[![Analyze Logs](https://github.com/felixotieno1011-art/honeypot-factory/actions/workflows/analyze-logs.yml/badge.svg)](https://github.com/felixotieno1011-art/honeypot-factory/actions/workflows/analyze-logs.yml)
+![Security Gate](https://img.shields.io/badge/Security_Scan-Trivy_Enforced-blue)
+![License](https://img.shields.io/badge/license-MIT-blue)
+
+
 # DevSecOps Honeypot Factory
 
 An Infrastructure-as-Code (IaC) deployment pipeline that spins up a Cowrie SSH honeypot, traps malicious login attempts, and analyzes the data.
@@ -66,3 +72,23 @@ This project is built entirely on an Android device using Termux.
 1. Clone the repo: git clone https://github.com/felixotieno1011-art/honeypot-factory.git
 2. Run ./dev.sh test to verify Python dependencies.
 3. Push to main to trigger the CI/CD pipeline.
+
+## Known Limitations & Production Roadmap
+
+This project is a **pipeline demonstration**, not a production honeypot. Two limitations are acknowledged:
+
+### 1. Ephemeral Deployment Target
+The Ansible playbook currently targets `localhost` inside the GitHub Actions runner. The runner is destroyed at the end of the job, so the honeypot does not accumulate real telemetry across runs. The `data/mock_cowrie.json` file is synthetic demo data used to exercise the analysis scripts.
+
+**Production fix:** Change `ansible/inventory/hosts.ini` to point at a persistent VM (VPS or on-prem host) reachable over SSH. Add `VM_HOST`, `VM_USER`, and `VM_SSH_KEY` as GitHub Secrets, and gate the `deploy-test` job on those secrets being present.
+
+### 2. Trivy Runs in Report-Only Mode
+The `security-scan` job uses `exit-code: '0'` so the pipeline can complete while demonstrating what Trivy finds. Real enforcement requires `exit-code: '1'` plus a `.trivyignore` file listing explicitly accepted CVEs with justification.
+
+**Production fix:** Flip `exit-code` to `'1'`, add `.trivyignore`, and require PR review for any new entry.
+
+### 3. Containment
+The container runs with `capabilities: []`, `no-new-privileges:true`, and a 256M memory cap. A production deployment should additionally:
+- Run on an isolated Docker network with no outbound egress by default
+- Use a read-only root filesystem with a writable volume only for logs
+- Forward logs to an external SIEM (Project 2) over a one-way channel
